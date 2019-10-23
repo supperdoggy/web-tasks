@@ -67,7 +67,7 @@ def delete(id):
 # moving to inProgress
 @app.route("/inprogress/<int:id>", methods=["POST", "GET"])
 def inprogress(id):
-    return move(Todo, inProcess, id, db)
+    return moveTask(Todo, inProcess, id, db)
 
 # deleting from inProgress
 @app.route("/inprogress/delete/<int:id>", methods=["POST", "GET"])
@@ -77,7 +77,7 @@ def deleteTaskInProgress(id):
 # moving to Done
 @app.route('/done/<int:id>', methods=["POST", "GET"])
 def moveToDone(id):
-    return move(inProcess, Done, id, db)
+    return moveTask(inProcess, Done, id, db)
 
 # deliting from
 @app.route("/done/delete/<int:id>", methods=["POST", "GET"])
