@@ -10,7 +10,7 @@ def deleteTask(table, id, db):
     except:
         return "error"
 
-def move(table, nextTable, id, db):
+def moveTask(table, nextTable, id, db):
 
     task_to_move = table.query.get_or_404(id)
 

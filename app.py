@@ -2,7 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect
 from datetime import datetime
 import dataBase
 from dbmethods import deleteTask
-from dbmethods import move
+from dbmethods import moveTask
 
 
 # sqllite database
@@ -79,7 +79,7 @@ def deleteTaskInProgress(id):
 def moveToDone(id):
     return move(inProcess, Done, id, db)
 
-# deliting from Done
+# deliting from
 @app.route("/done/delete/<int:id>", methods=["POST", "GET"])
 def deleteDone(id):
     return deleteTask(Done, id, db)
