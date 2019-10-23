@@ -3,7 +3,14 @@ from datetime import datetime
 import dataBase
 from dbmethods import deleteTask
 from dbmethods import moveTask
+import uuid
+from dbmethods import uniqueStrGenerator
 
+
+
+# Todo: create comment section by just adding column with comments
+# Todo: create comment proccess by adding uniqie url for every Todo
+# Todo: create lists of Tasks
 
 # sqllite database
 app = Flask(__name__, template_folder="templates")
@@ -12,6 +19,7 @@ db = dataBase.data(app)
 
 # табличка, яка зберігає значення, які вводить юзер 
 class Todo(db.Model):
+    uniqueId = db.Column(db.String(25), default=uniqueStrGenerator)
     id = db.Column(db.Integer, primary_key=True)
     # nullable, тому що контент не може бути пустий
     content = db.Column(db.String(200), nullable=False)
@@ -22,6 +30,7 @@ class Todo(db.Model):
 
 # табличка, яка приймає значення, які переходять з ToDo в In process
 class inProcess(db.Model):
+    uniqueId = db.Column(db.String(25), default=uniqueStrGenerator)
     id = db.Column(db.Integer, primary_key=True)
     # nullable відсутній, адже є в ToDo
     content = db.Column(db.String(200))
@@ -32,6 +41,7 @@ class inProcess(db.Model):
 
 # табличка, яка приймає значення, які переходять з ToDo в In process
 class Done(db.Model):
+    uniqueId = db.Column(db.String(25), default=uniqueStrGenerator)
     id = db.Column(db.Integer, primary_key=True)
     # nullable відсутній, адже є в ToDo
     content = db.Column(db.String(200))
