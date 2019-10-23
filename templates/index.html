@@ -6,9 +6,9 @@ Main Page
 
 {% block body %}
 <div class='content'>
-    <h1 style="text-align: center">Task Master</h1>
+    <h1 style="text-align: center">Tasks</h1>
 
-    <table>
+    <table bordercolor=RED>
         <tr>
             <th>Task</th>
             <th>Added</th>
@@ -19,19 +19,89 @@ Main Page
                 <td>{{task.content}}</td>
                 <td>{{task.date_created.date()}}</td>
                 <td>
-                    <a href="/delete/{{task.id}}">Delete</a>
-                    <br>
-                    <a href="/update/{{task.id}}">Update</a>
+                    <form action="/delete/{{task.id}}">
+                        <input type="submit" value="Delete">
+                    </form>
+                    <form action="/inprogress/{{task.id}}">
+                        <input type="submit" value="Move to in progress">
+                    </form>
                 </td>
             </tr>
         {% endfor %}
 
 
     </table>
+
     <form action="/" method="POST">
         <input type="text" name="content" id="content">
         <input type="submit" value="add task">
     </form>
+    
+    <br>
+    <br>
+    <br>
+
+    <h1 style="text-align: center">In progress</h1>
+
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for process in process %}        
+            <tr>
+                <td>{{process.content}}</td>
+                <td>{{process.date_created.date()}}</td>
+                <td>
+                    <form action="/inprogress/delete/{{process.id}}">
+                        <input type="submit" value="Delete">
+                    </form>
+                    <form action="/done/{{process.id}}">
+                        <input type="submit" value="Move to in progress">
+                    </form>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+
+    <br>
+    <br>
+    <br>
+
+    <h1 style="text-align: center">Done</h1>
+
+    <table>
+        <tr>
+            <th>Task</th>
+            <th>Added</th>
+            <th>Actions</th>
+        </tr>
+        {% for done in done %}        
+            <tr>
+                <td>{{done.content}}</td>
+                <td>{{done.date_created.date()}}</td>
+                <td>
+                    <form action="/done/delete/{{done.id}}">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+
+
+    </table>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 
 {% endblock %}
