@@ -7,7 +7,7 @@ import uuid
 from dbmethods import uniqueStrGenerator
 
 
-
+# TODO: rewrite code moving and deleting urls
 # Todo: create pages with their own Dodo's
 
 # sqllite database
