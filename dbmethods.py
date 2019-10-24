@@ -21,7 +21,7 @@ def moveTask(table, nextTable, id, db):
         db.session.delete(task_to_move)
         db.session.commit()
         
-        new_task = nextTable(content=task_to_move.content)
+        new_task = nextTable(content=task_to_move.content, comment=task_to_move.comment)
         db.session.add(new_task)
         db.session.commit()
         return redirect('/')
@@ -44,4 +44,4 @@ def uniqueStrGenerator(self=24):
         pas_keys.remove(pas_keys[0])
         i += 1
     return uniqueStr
-
+    

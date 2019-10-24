@@ -1,7 +1,47 @@
 {% extends 'base.html' %}
 
 {% block head %}
-Main Page
+<style>
+        body, html {
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.content {
+    margin: 0 auto;
+    width: 400px;
+}
+
+table, td, th {
+    border: 1px solid #000000;
+
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.form {
+    margin-top: 20px;
+}
+
+#content {
+    width: 70%;
+}
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Main page</title>
+
 {% endblock %}
 
 {% block body %}
@@ -16,7 +56,7 @@ Main Page
         </tr>
         {% for task in tasks %}        
             <tr>
-                <td>{{task.content}}</td>
+                <td><a href="/comment/{{task.modelClass}}/{{task.id}}">{{task.content}}</a></td>
                 <td>{{task.date_created.date()}}</td>
                 <td>
                     <form action="/delete/{{task.id}}">
@@ -51,7 +91,7 @@ Main Page
         </tr>
         {% for process in process %}        
             <tr>
-                <td>{{process.content}}</td>
+                <td><a href="/comment/{{process.modelClass}}/{{process.id}}">{{process.content}}</a></td>
                 <td>{{process.date_created.date()}}</td>
                 <td>
                     <form action="/inprogress/delete/{{process.id}}">
@@ -82,7 +122,7 @@ Main Page
         </tr>
         {% for done in done %}        
             <tr>
-                <td>{{done.content}}</td>
+                <td><a href="/comment/{{done.modelClass}}/{{done.id}}">{{done.content}}</a></td>
                 <td>{{done.date_created.date()}}</td>
                 <td>
                     <form action="/done/delete/{{done.id}}">

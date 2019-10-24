@@ -8,9 +8,7 @@ from dbmethods import uniqueStrGenerator
 
 
 
-# Todo: create comment section by just adding column with comments
-# Todo: create comment proccess by adding uniqie url for every Todo
-# Todo: create lists of Tasks
+# Todo: create pages with their own Dodo's
 
 # sqllite database
 app = Flask(__name__, template_folder="templates")
@@ -19,33 +17,36 @@ db = dataBase.data(app)
 
 # табличка, яка зберігає значення, які вводить юзер 
 class Todo(db.Model):
-    uniqueId = db.Column(db.String(25), default=uniqueStrGenerator)
+    modelClass = db.Column(db.Integer, default=1)
     id = db.Column(db.Integer, primary_key=True)
     # nullable, тому що контент не може бути пустий
     content = db.Column(db.String(200), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    comment = db.Column(db.String, default="")
 
     def __repl__(self):
         return "<Task %s>" % self.id
 
 # табличка, яка приймає значення, які переходять з ToDo в In process
 class inProcess(db.Model):
-    uniqueId = db.Column(db.String(25), default=uniqueStrGenerator)
+    modelClass = db.Column(db.Integer, default=2)
     id = db.Column(db.Integer, primary_key=True)
     # nullable відсутній, адже є в ToDo
     content = db.Column(db.String(200))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    comment = db.Column(db.String, default="")
 
     def __repl__(self):
         return "<Task %s>" % self.id
 
 # табличка, яка приймає значення, які переходять з ToDo в In process
 class Done(db.Model):
-    uniqueId = db.Column(db.String(25), default=uniqueStrGenerator)
+    modelClass = db.Column(db.Integer, default=3)
     id = db.Column(db.Integer, primary_key=True)
     # nullable відсутній, адже є в ToDo
     content = db.Column(db.String(200))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    comment = db.Column(db.String, default="")
 
     def __repl__(self):
         return "<Task %s>" % self.id
@@ -89,11 +90,34 @@ def deleteTaskInProgress(id):
 def moveToDone(id):
     return moveTask(inProcess, Done, id, db)
 
-# deliting from
+# deleting from
 @app.route("/done/delete/<int:id>", methods=["POST", "GET"])
 def deleteDone(id):
     return deleteTask(Done, id, db)
 
+@app.route('/comment/<int:modelClass>/<int:id>', methods=["POST", "GET"])
+def commentary(modelClass, id):
+    if request.method == "POST":
+        if modelClass == 1:
+            task = Todo.query.get_or_404(id)
+        elif modelClass == 2:
+            task = inProcess.query.get_or_404(id)
+        else:
+            task = Done.query.get_or_404(id)
+        task.comment = request.form["comment"]
+        try:
+            db.session.commit()
+            return redirect("/")
+        except:
+            return "error"
+    else:
+        if modelClass == 1:
+            task = Todo.query.get_or_404(id)
+        elif modelClass == 2:
+            task = inProcess.query.get_or_404(id)
+        else:
+            task = Done.query.get_or_404(id)
+        return render_template("comment.html", task=task)
 
 if __name__ == "__main__":
     app.run(debug=True)  

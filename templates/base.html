@@ -4,46 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <style>
-        body, html {
-    margin: 0;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
-.content {
-    margin: 0 auto;
-    width: 400px;
-}
-
-table, td, th {
-    border: 1px solid #000000;
-
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th {
-    height: 30px;
-}
-
-td {
-    text-align: center;
-    padding: 5px;
-}
-
-.form {
-    margin-top: 20px;
-}
-
-#content {
-    width: 70%;
-}
-    </style>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>{% block head %}{% endblock %}</title>
+    {% block head %}
+    
+    {% endblock %}
 </head>
 <body background="https://images.ctfassets.net/ooa29xqb8tix/4vIoLRfHhmIW04ykCiwigG/b4da73a75924aa42e5682dd7caaa1769/5K_Wallpaper_1.png">
     {% block body %}{% endblock %}
