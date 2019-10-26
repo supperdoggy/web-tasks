@@ -4,24 +4,41 @@ from random import randint
 import random
 
 
-def deleteTask(table, id, db):
-    taks_to_delete = table.query.get_or_404(id)
+def deleteTask(task_to_delete, db):
     try:
-        db.session.delete(taks_to_delete)
+        db.session.delete(task_to_delete)
         db.session.commit()
         return redirect("/")
     except:
         return "error"
 
-def moveTask(table, nextTable, id, db):
+def getTable(modelId, Todo, inProcces, Done):
+    if modelId == 1:
+        return Todo
+    
+    elif modelId == 2:
+        return inProcces
+    
+    else:
+        return Done
 
+def getNextTable(modelId, inProcces, Done):
+    if modelId == 1:
+        return inProcces
+    else:
+        return Done
+
+def moveTask(modelId, id, db, Todo, inProcess, Done):
+    table = getTable(modelId, Todo, inProcess, Done)
     task_to_move = table.query.get_or_404(id)
 
     try:
         db.session.delete(task_to_move)
         db.session.commit()
-        
+
+        nextTable = getNextTable(modelId, inProcess, Done)
         new_task = nextTable(content=task_to_move.content, comment=task_to_move.comment)
+        
         db.session.add(new_task)
         db.session.commit()
         return redirect('/')
@@ -44,4 +61,15 @@ def uniqueStrGenerator(self=24):
         pas_keys.remove(pas_keys[0])
         i += 1
     return uniqueStr
+
+def getTask(modelId, id, Todo, inProcess, Done):
+    if modelId == 1:
+        task = Todo.query.get_or_404(id)
+    elif modelId == 2:
+        task = inProcess.query.get_or_404(id)
+    else:
+        task = Done.query.get_or_404(id)
+    
+    return task
+
     

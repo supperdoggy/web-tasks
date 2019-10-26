@@ -5,9 +5,9 @@ from dbmethods import deleteTask
 from dbmethods import moveTask
 import uuid
 from dbmethods import uniqueStrGenerator
+from dbmethods import getTask
 
 
-# TODO: rewrite code moving and deleting urls
 # Todo: create pages with their own Dodo's
 
 # sqllite database
@@ -70,40 +70,21 @@ def index():
         render_template("base.html")
         return render_template('index.html', tasks=tasks, process=process, done=done)
 
-# route for deleting ToDo things
-@app.route('/delete/<int:id>')
-def delete(id):
-    return deleteTask(Todo, id, db)
+@app.route("/move/<int:modelClass>/<int:id>")
+def move(modelClass, id):
+    return moveTask(modelClass, id, db, Todo, inProcess, Done)
 
-# moving to inProgress
-@app.route("/inprogress/<int:id>", methods=["POST", "GET"])
-def inprogress(id):
-    return moveTask(Todo, inProcess, id, db)
 
-# deleting from inProgress
-@app.route("/inprogress/delete/<int:id>", methods=["POST", "GET"])
-def deleteTaskInProgress(id):
-    return deleteTask(inProcess, id, db)
-
-# moving to Done
-@app.route('/done/<int:id>', methods=["POST", "GET"])
-def moveToDone(id):
-    return moveTask(inProcess, Done, id, db)
-
-# deleting from
-@app.route("/done/delete/<int:id>", methods=["POST", "GET"])
-def deleteDone(id):
-    return deleteTask(Done, id, db)
+@app.route('/delete/<int:modelClass>/<int:id>', methods=["POST", "GET"])
+def delete(modelClass, id):
+    task = getTask(modelClass, id, Todo, inProcess, Done)
+    return deleteTask(task, db)
 
 @app.route('/comment/<int:modelClass>/<int:id>', methods=["POST", "GET"])
 def commentary(modelClass, id):
+    task = getTask(modelClass, id, Todo, inProcess, Done)
+
     if request.method == "POST":
-        if modelClass == 1:
-            task = Todo.query.get_or_404(id)
-        elif modelClass == 2:
-            task = inProcess.query.get_or_404(id)
-        else:
-            task = Done.query.get_or_404(id)
         task.comment = request.form["comment"]
         try:
             db.session.commit()
@@ -111,12 +92,6 @@ def commentary(modelClass, id):
         except:
             return "error"
     else:
-        if modelClass == 1:
-            task = Todo.query.get_or_404(id)
-        elif modelClass == 2:
-            task = inProcess.query.get_or_404(id)
-        else:
-            task = Done.query.get_or_404(id)
         return render_template("comment.html", task=task)
 
 if __name__ == "__main__":
