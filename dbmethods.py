@@ -1,8 +1,6 @@
 from flask import redirect
 from sqlalchemy.orm import sessionmaker
-from random import randint
-import random
-
+from constants import *
 
 def deleteTask(task_to_delete, db):
     try:
@@ -13,19 +11,19 @@ def deleteTask(task_to_delete, db):
         return "error"
 
 def getTable(modelId, Todo, inProcces, Done):
-    if modelId == 1:
+    if modelId == TODO_MODEL_NUMBER:
         return Todo
     
-    elif modelId == 2:
+    elif modelId == INPROCESS_MODEL_NUMBER:
         return inProcces
     
-    else:
+    elif modelId == DONE_MODEL_NUMBER:
         return Done
 
 def getNextTable(modelId, inProcces, Done):
-    if modelId == 1:
+    if modelId == TODO_MODEL_NUMBER:
         return inProcces
-    else:
+    elif modelId == INPROCESS_MODEL_NUMBER:
         return Done
 
 def moveTask(modelId, id, db, Todo, inProcess, Done):
@@ -38,38 +36,30 @@ def moveTask(modelId, id, db, Todo, inProcess, Done):
 
         nextTable = getNextTable(modelId, inProcess, Done)
         new_task = nextTable(content=task_to_move.content, comment=task_to_move.comment)
-        
+    
         db.session.add(new_task)
         db.session.commit()
         return redirect('/')
     except:
         return "error"
 
-def uniqueStrGenerator(self=24):
-    low_letters = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l',
-                   'z', 'x', 'c', 'v', 'b', 'n', 'm']
-    high_letters = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
-                    'Z', 'X', 'C', 'V', 'B', 'N', 'M']
-    nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-    symbols = ['!', '@', '#', '$', '&', '?']
-    pas_keys = low_letters + high_letters + nums + symbols
-    random.shuffle(pas_keys)
-    i = 0
-    uniqueStr = ""
-    while i < self:
-        uniqueStr += pas_keys[0]
-        pas_keys.remove(pas_keys[0])
-        i += 1
-    return uniqueStr
-
 def getTask(modelId, id, Todo, inProcess, Done):
-    if modelId == 1:
+    if modelId == TODO_MODEL_NUMBER:
         task = Todo.query.get_or_404(id)
-    elif modelId == 2:
+    elif modelId == INPROCESS_MODEL_NUMBER:
         task = inProcess.query.get_or_404(id)
-    else:
+    elif modelId == DONE_MODEL_NUMBER:
         task = Done.query.get_or_404(id)
     
     return task
 
-    
+def checkAccess(password, username,Users):
+    i = 1
+    try:
+        while True:
+            if Users.query.get_or_404(i).username == username and  Users.query.get_or_404(i).password == password:
+                return True
+            else:
+                i += 1
+    except:
+        return False

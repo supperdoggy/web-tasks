@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <style>
+    <link rel="stylesheet" href="static/css/comment.css">
+    <title>{{task.content}}</title>
+<style>
+
 .btn {
 	display: inline-block;
 	background: transparent;
@@ -12,7 +15,7 @@
 	padding: 0;
 	transition: all 200ms ease-in;
 	cursor: pointer;
-	
+	text-align: center;
 	background: rgb(214, 43, 163);
 	color: #ffffffd5;
 	box-shadow: 0 0 10px 2px rgba(192, 80, 80, 0.1);
@@ -26,7 +29,7 @@ textarea {
   max-width:600px;
   color:#999;
   font-weight:400;
-  font-size:30px;
+  font-size:25px;
   font-family:'Ubuntu', Helvetica, Arial, sans-serif;
   width:100%;
   background:#fff;
@@ -41,32 +44,22 @@ textarea {
 -o-transition: height 2s ease;
 transition: height 2s ease;
 }
-    
-    </style>
-
-    <title>{{task.content}}</title>
-
-    
-
+</style>
 {% endblock %}
 
 {% block body %}
 
 
-
-<div style="text-align: center;" class="content">
-    <h1 style="text-align: center;font-size: 40px;" >{{task.content}}</h1>
-    <br>
-    <br>
-
+<div class="content">
+    <a href="/" style="color: #000000;text-decoration:none;" ><h1 style="text-align: center;font-size: 40px;">{{task.content}}</h1></a>
     <form action="/comment/{{task.modelClass}}/{{task.id}}" method="POST">
-        <div style="text-align: center;">
-            <textarea  spellcheck="false" ng-model="loremIpsum" ng-keyup="autoExpand($event)" name="comment" style="width: 400px; height: 500px;" id="comment">{{task.comment}}</textarea>
+        <div class="textarea" style="text-align: center;">
+            <textarea class="textarea"  spellcheck="false" ng-model="loremIpsum" ng-keyup="autoExpand($event)" name="comment" style="width: 400px; height: 500px;" id="comment">{{task.comment}}</textarea>
         </div>
-        <input class="btn" type="submit" value="Save">
+        <div style="text-align: center;">
+            <input class="btn" type="submit" value="Save">
+        </div>
     </form>
-
-
 </div>
 
 
