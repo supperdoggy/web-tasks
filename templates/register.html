@@ -1,13 +1,14 @@
 {% extends "base.html" %}
+
 {% block head %}
 
-<title>login</title>
+<title>Register</title>
 <link rel="stylesheet" href="static/css/login.css">
-
 {% endblock %}
 
 {% block body %}
-<form action="/login" method="POST">
+
+<form action="/register" method="POST">
     <div class="login">
     <div class="login-screen">
     <div class="app-title">
@@ -20,12 +21,12 @@
     <div class="control-group">
                     <input type="password" class="login-field" value="" placeholder="password" name="password">
     <label class="login-field-icon fui-lock" for="login-pass"></label></div>
-    <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block">
+    <input type="submit" value="Register" class="btn btn-primary btn-large btn-block">
+    
+    </div>
+    </div>
+    </div>
     </form>
-<br>
-<br>
-<br>
-<a href="/register" class="btn btn-primary btn-large btn-block">register</a>
-{% endblock %}
 
+{% endblock %}
 

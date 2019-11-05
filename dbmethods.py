@@ -1,12 +1,40 @@
 from flask import redirect
 from sqlalchemy.orm import sessionmaker
 from constants import *
+import random
+import string
 
 def deleteTask(task_to_delete, db):
     try:
         db.session.delete(task_to_delete)
         db.session.commit()
         return redirect("/")
+    except:
+        return "error"
+
+def checkIfExists(username, Users):
+    i = 0
+    try:
+        while True:
+            if Users.query.get_or_404(i).username == username:
+                return True
+            else:
+                i += 1
+    except:
+        return False
+
+def getId(username, Users):
+    i = 0
+    while True:
+        if Users.query.get_or_404(i).username == username:
+            return Users.query.get_or_404(i).uniqueId
+        else:
+            i += 1
+
+def addTask(task, db):
+    try:
+        db.session.add(task)
+        db.session.commit()
     except:
         return "error"
 
@@ -26,7 +54,7 @@ def getNextTable(modelId, inProcces, Done):
     elif modelId == INPROCESS_MODEL_NUMBER:
         return Done
 
-def moveTask(modelId, id, db, Todo, inProcess, Done):
+def moveTask(modelId, id, owner, db, Todo, inProcess, Done):
     table = getTable(modelId, Todo, inProcess, Done)
     task_to_move = table.query.get_or_404(id)
 
@@ -35,7 +63,7 @@ def moveTask(modelId, id, db, Todo, inProcess, Done):
         db.session.commit()
 
         nextTable = getNextTable(modelId, inProcess, Done)
-        new_task = nextTable(content=task_to_move.content, comment=task_to_move.comment)
+        new_task = nextTable(content=task_to_move.content, comment=task_to_move.comment, owner=task_to_move.owner)
     
         db.session.add(new_task)
         db.session.commit()
@@ -63,3 +91,8 @@ def checkAccess(password, username,Users):
                 i += 1
     except:
         return False
+
+def randomString(stringLenght=24):
+    # generating random string
+    return ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(stringLenght))
+
