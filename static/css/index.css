@@ -14,7 +14,7 @@ body, html {
 }
 
 table, td, th {
-    border: 1px solid #861010;
+    border: 1px solid #000000;
 }
 
 table {
@@ -72,34 +72,3 @@ td {
 	padding: 19px 18px;
 }
 
-.content {
-    margin: 0 auto;
-    width: 400px;
-}
-
-table, td, th {
-    border: 1px solid #000000;
-
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th {
-    height: 30px;
-}
-
-td {
-    text-align: center;
-    padding: 5px;
-}
-
-.form {
-    margin-top: 20px;
-}
-
-#content {
-    width: 70%;
-}
