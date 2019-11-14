@@ -10,21 +10,27 @@ from dbmethods import *
 from uuid import uuid4
 import flask_login
 
-# Todo: create pages with their own Dodo's
-# TODO: error handling
-# TODO: register
+# ================================ [ TODOs ] ===================================================
 
-# sqllite database
+# TODO: ?? create pages with their own Dodo's ??
+# TODO: error handling
+# TODO: register via email
+
+# ================================ [ TODOs ] ===================================================
+# ==============================================================================================
+
 app = Flask(__name__, template_folder="templates")
 app.config['SQLALCHEMY_DATABASE_URI'] = SQL_CFG
 db = dataBase.data(app)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
+# ==============================================================================================
+# ================================ [ Models for db ] ===========================================
+
 class Todo(db.Model):
     modelClass = db.Column(db.Integer, default=TODO_MODEL_NUMBER)
     id = db.Column(db.Integer, primary_key=True)
-    # nullable, тому що контент не може бути пустий
     content = db.Column(db.String(200), nullable=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     comment = db.Column(db.String, default="")
@@ -65,7 +71,10 @@ class Users(db.Model):
     def __repl__(self):
         return "<User %s>" % self.id
 
-# Main page
+# ================================ [ Models for db ] =============================================
+# ================================================================================================
+# ================================= [ Index page ] ===============================================
+
 @app.route('/', methods=["POST", "GET"])
 def index():    
     current_user = str(session.get("user"))
@@ -75,10 +84,7 @@ def index():
                 task_content = request.form['content']
                 new_task = Todo(content=task_content, owner=current_user)
                 addTask(new_task, db)
-
-                return redirect("/")
-            else:
-                return redirect("/")
+            return redirect("/")
         else:   
             tasks = Todo.query.filter_by(owner=current_user).all()
             process = inProcess.query.filter_by(owner=current_user).all()
@@ -88,36 +94,62 @@ def index():
     else:
         return redirect("/login")
 
+# ================================= [ Index page ] ===============================================
+# =========================== [ New index page for tasks ] =======================================
+# ================================= [ In progress ] ==============================================
+@app.route('/tasknew')
+def newIndex():
+    if session.get('logged_in'):
+        current_user = str(session.get("user"))
+        tasks = Todo.query.filter_by(owner=current_user).all()
+        return render_template("tasks_new.html", tasks=tasks)
+    else:
+        return redirect('/login')
+
+# ================================= [ In progress ] ================================================
+# ==================================================================================================
+# ================================= [ Moving url ] =================================================
+
 @app.route("/move/<int:modelClass>/<int:id>")
 def move(modelClass, id):
     current_user = session.get("user")
     if session.get('logged_in'):
-        return moveTask(modelClass, id, current_user, db, Todo, inProcess, Done)
-    
-    else:
-        return redirect("/login")
+        task = getTask(modelClass, id, Todo, inProcess, Done)
+        if task.owner == current_user:
+            moveTask(task, db, Todo, inProcess, Done)
+    return redirect("/")
+
+# ================================= [ Moving url ] =================================================
+# ==================================================================================================
+# ================================= [ Delete url ] =================================================
 
 @app.route('/delete/<int:modelClass>/<int:id>', methods=["POST", "GET"])
 def delete(modelClass, id):
     if session.get('logged_in'):
         task = getTask(modelClass, id, Todo, inProcess, Done)
-        return deleteTask(task, db)
-    else:
-        return redirect("/login")
+        if task.owner == session.get("user"):
+            deleteTask(task, db)
+    return redirect("/")
 
+# ================================= [ Delete url ] =================================================
+# ==================================================================================================
+# ================================= [ Comment url ] ================================================
 @app.route('/comment/<int:modelClass>/<int:id>', methods=["POST", "GET"])
 def commentary(modelClass, id):
     if session.get('logged_in'):
+        current_user = session.get("user")
         task = getTask(modelClass, id, Todo, inProcess, Done)
+        if task.owner == current_user:
+            if request.method == "POST":
+                updateComment(task, request.form["comment"], db)
+                return redirect("/")
+            else:
+                return render_template("comment.html", task=task)
+    return redirect("/")
 
-        if request.method == "POST":
-            task.comment = request.form["comment"]
-            db.session.commit()
-            return redirect("/")
-        else:
-            return render_template("comment.html", task=task)
-    else:
-        return redirect("/login")
+# ================================= [ Comment url ] ================================================
+# ==================================================================================================
+# ================================= [ Login url ] ==================================================
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
@@ -126,12 +158,17 @@ def login():
     if request.method == "POST":
         if checkAccess(request.form["password"], request.form["username"], Users):
             session["logged_in"] = True
+# ?? maybe make check by unique id ??
             session["user"] = request.form["username"]
             return redirect("/")
         else:
             return redirect("/login")
     else:
         return render_template('login.html')
+
+# ================================= [ Login url ] ==================================================
+# ==================================================================================================
+# ================================= [ Register url ] ===============================================
 
 @app.route("/register", methods=["POST", "GET"])
 def logout():
@@ -144,6 +181,8 @@ def logout():
             return redirect("/login")
     else:
         return render_template("register.html")
+
+# ================================= [ Register url ] ===============================================
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)

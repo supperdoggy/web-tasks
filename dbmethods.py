@@ -4,11 +4,17 @@ from constants import *
 import random
 import string
 
+def updateComment(task, new_comment, db):
+    if task.comment == new_comment:
+        return 0
+    else:
+        task.comment == new_comment
+        db.session.commit()
+
 def deleteTask(task_to_delete, db):
     try:
         db.session.delete(task_to_delete)
         db.session.commit()
-        return redirect("/")
     except:
         return "error"
 
@@ -22,14 +28,6 @@ def checkIfExists(username, Users):
                 i += 1
     except:
         return False
-
-def getId(username, Users):
-    i = 0
-    while True:
-        if Users.query.get_or_404(i).username == username:
-            return Users.query.get_or_404(i).uniqueId
-        else:
-            i += 1
 
 def addTask(task, db):
     try:
@@ -54,20 +52,12 @@ def getNextTable(modelId, inProcces, Done):
     elif modelId == INPROCESS_MODEL_NUMBER:
         return Done
 
-def moveTask(modelId, id, owner, db, Todo, inProcess, Done):
-    table = getTable(modelId, Todo, inProcess, Done)
-    task_to_move = table.query.get_or_404(id)
-
+def moveTask(task, db, Todo, inProcess, Done):
     try:
-        db.session.delete(task_to_move)
-        db.session.commit()
-
-        nextTable = getNextTable(modelId, inProcess, Done)
-        new_task = nextTable(content=task_to_move.content, comment=task_to_move.comment, owner=task_to_move.owner)
-    
-        db.session.add(new_task)
-        db.session.commit()
-        return redirect('/')
+        deleteTask(task, db)
+        nextTable = getNextTable(task.modelClass, inProcess, Done)
+        new_task = nextTable(content=task.content, comment=task.comment, owner=task.owner)
+        addTask(new_task, db)
     except:
         return "error"
 
@@ -93,6 +83,13 @@ def checkAccess(password, username,Users):
         return False
 
 def randomString(stringLenght=24):
-    # generating random string
     return ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(stringLenght))
 
+# ?
+# def getId(username, Users):
+#     i = 0
+#     while True:
+#         if Users.query.get_or_404(i).username == username:
+#             return Users.query.get_or_404(i).uniqueId
+#         else:
+#             i += 1
