@@ -97,14 +97,16 @@ def index():
 # ================================= [ Index page ] ===============================================
 # =========================== [ New index page for tasks ] =======================================
 # ================================= [ In progress ] ==============================================
-# @app.route('/tasknew')
-# def newIndex():
-#     if session.get('logged_in'):
-#         current_user = str(session.get("user"))
-#         tasks = Todo.query.filter_by(owner=current_user).all()
-#         return render_template("tasks_new.html", tasks=tasks)
-#     else:
-#         return redirect('/login')
+@app.route('/tasknew')
+def newIndex():
+    if session.get('logged_in'):
+        current_user = str(session.get("user"))
+        tasks = Todo.query.filter_by(owner=current_user).all()
+        process = inProcess.query.filter_by(owner=current_user).all()
+        done = Done.query.filter_by(owner=current_user).all()
+        return render_template("new_index.html", task=tasks, process=process, done=done)
+    else:
+        return redirect('/login')
 
 # ================================= [ In progress ] ================================================
 # ==================================================================================================

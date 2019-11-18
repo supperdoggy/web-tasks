@@ -1,0 +1,133 @@
+body{
+background: #d6eaf8;
+overflow-x: hidden;
+    
+}
+a{
+    text-decoration: none;
+}
+.main_1{
+    margin:auto;
+    width:400px;
+/*    background:red;*/
+}
+
+#main{
+/*   position:relative;*/
+           width:100%;
+    height:100%;
+    margin:20px;
+    text-align:center;
+/*    background:green;*/
+    margin-left:0;
+}
+.sign_in_button {
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  width: 140px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 45px;
+  margin: 10px 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #524f4e;
+    position:absolute;
+    right:0px;
+    top:10px;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0,0,0,.1);
+  transition: .3s;
+}
+.sign_in_button:hover {
+  background: rgb(255,124,0);
+  box-shadow: linear-gradient(to right, rgb(255,124,0), rgb(249,187,0));
+  color: white;
+  transform: translateY(-7px);
+}
+.title{
+    margin:auto;
+    width:75px;
+/*    background:green;*/
+}
+.task{
+    text-align: center;
+}
+.inpr{
+    display:inline-block;
+    position:relative;
+    top:10px;
+    margin:auto;
+        text-align: center;
+}
+.done{
+      display:inline-block;
+    position:relative;
+    top:10px; 
+/*   right:120px;*/
+        text-align: center;
+}
+.container{
+/*    	-webkit-perspective: 800px;*/
+    margin: 10px; 
+    text-align: center;
+/*margin-left:0;*/
+    padding: 15px;
+    word-wrap: break-word; 
+       background: linear-gradient(90deg, rgb(220,220,220), rgb(255,255,255));
+    
+         border-radius: 5px; 
+     box-shadow: 0px 0px 84px -21px #000000;
+}
+.title_txt{
+/*    height:100%;*/
+/*    width:60%;*/
+    margin:0;
+    margin-top:-15px;
+/*    float:left;*/
+/*    border-right:1px solid black;*/
+}
+.otstup{
+    height:20px;
+}
+.date{
+/*    float:left;*/
+/*        height:100%;*/
+/*    width:20%;*/
+    margin-top:50px;
+/*        border-right:1px solid black;*/
+    margin:auto;
+}
+.sign_in{
+    right:5%;
+    top:-1px;
+    position:absolute;
+}
+.button_div{
+/*    margin:15px;*/
+        width:50px;
+    float:left;
+    margin-left:-10px;
+    height:50px;
+}
+.button_div2{
+/*    margin:15px;*/
+        width:50px;
+    float:right;
+    margin-right:125px;
+    height:50px;
+}
+.hr{
+    margin:auto;
+    border-radius:1px;
+    width:90%;
+    height:2px;
+    margin-top:50px;
+    margin-bottom: 20px;
+    background:rgb(59,59,59);
+}
