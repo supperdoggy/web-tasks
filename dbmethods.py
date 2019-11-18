@@ -8,7 +8,7 @@ def updateComment(task, new_comment, db):
     if task.comment == new_comment:
         return 0
     else:
-        task.comment == new_comment
+        task.comment = new_comment
         db.session.commit()
 
 def deleteTask(task_to_delete, db):
@@ -56,7 +56,7 @@ def moveTask(task, db, Todo, inProcess, Done):
     try:
         deleteTask(task, db)
         nextTable = getNextTable(task.modelClass, inProcess, Done)
-        new_task = nextTable(content=task.content, comment=task.comment, owner=task.owner)
+        new_task = nextTable(content=task.content, comment=task.comment, owner=task.owner, date_created=task.date_created)
         addTask(new_task, db)
     except:
         return "error"

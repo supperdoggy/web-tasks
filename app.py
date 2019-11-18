@@ -43,7 +43,7 @@ class inProcess(db.Model):
     modelClass = db.Column(db.Integer, default=INPROCESS_MODEL_NUMBER)
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200))
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime)
     comment = db.Column(db.String, default="")
     owner = db.Column(db.String)
 
@@ -54,7 +54,7 @@ class Done(db.Model):
     modelClass = db.Column(db.Integer, default=DONE_MODEL_NUMBER)
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200))
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime)
     comment = db.Column(db.String, default="")
     owner = db.Column(db.String)
 
