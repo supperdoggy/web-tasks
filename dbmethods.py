@@ -11,6 +11,9 @@ def updateComment(task, new_comment, db):
         task.comment = new_comment
         db.session.commit()
 
+def checkOwner(current_user, owner):
+    return True if current_user == owner else False 
+
 def deleteTask(task_to_delete, db):
     try:
         db.session.delete(task_to_delete)

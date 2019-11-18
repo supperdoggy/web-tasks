@@ -97,14 +97,14 @@ def index():
 # ================================= [ Index page ] ===============================================
 # =========================== [ New index page for tasks ] =======================================
 # ================================= [ In progress ] ==============================================
-@app.route('/tasknew')
-def newIndex():
-    if session.get('logged_in'):
-        current_user = str(session.get("user"))
-        tasks = Todo.query.filter_by(owner=current_user).all()
-        return render_template("tasks_new.html", tasks=tasks)
-    else:
-        return redirect('/login')
+# @app.route('/tasknew')
+# def newIndex():
+#     if session.get('logged_in'):
+#         current_user = str(session.get("user"))
+#         tasks = Todo.query.filter_by(owner=current_user).all()
+#         return render_template("tasks_new.html", tasks=tasks)
+#     else:
+#         return redirect('/login')
 
 # ================================= [ In progress ] ================================================
 # ==================================================================================================
@@ -112,10 +112,9 @@ def newIndex():
 
 @app.route("/move/<int:modelClass>/<int:id>")
 def move(modelClass, id):
-    current_user = session.get("user")
     if session.get('logged_in'):
         task = getTask(modelClass, id, Todo, inProcess, Done)
-        if task.owner == current_user:
+        if checkOwner(session.get('user'), task.owner):
             moveTask(task, db, Todo, inProcess, Done)
     return redirect("/")
 
@@ -127,7 +126,7 @@ def move(modelClass, id):
 def delete(modelClass, id):
     if session.get('logged_in'):
         task = getTask(modelClass, id, Todo, inProcess, Done)
-        if task.owner == session.get("user"):
+        if checkOwner(session.get('user'), task.owner):
             deleteTask(task, db)
     return redirect("/")
 
@@ -137,9 +136,8 @@ def delete(modelClass, id):
 @app.route('/comment/<int:modelClass>/<int:id>', methods=["POST", "GET"])
 def commentary(modelClass, id):
     if session.get('logged_in'):
-        current_user = session.get("user")
         task = getTask(modelClass, id, Todo, inProcess, Done)
-        if task.owner == current_user:
+        if checkOwner(session.get('user'), task.owner):
             if request.method == "POST":
                 updateComment(task, request.form["comment"], db)
                 return redirect("/")
