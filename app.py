@@ -20,7 +20,7 @@ import flask_login
 # ==============================================================================================
 
 app = Flask(__name__, template_folder="templates")
-app.config['SQLALCHEMY_DATABASE_URI'] = SQL_CFG
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 db = dataBase.data(app)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
