@@ -186,4 +186,5 @@ def logout():
 
 if __name__ == "__main__":
     app.secret_key = os.urandom(24)
+    secret_hey = os.urandom(24)
     app.run()  
