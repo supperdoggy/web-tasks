@@ -77,7 +77,6 @@ virtualenvwrapper==4.8.4
 wcwidth==0.1.7
 Werkzeug==0.16.0
 wrapt==1.11.2
-wxPython==4.0.4
 yapf==0.28.0
 zipp==0.6.0
 zope.interface==4.6.0
