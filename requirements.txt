@@ -83,3 +83,4 @@ yapf==0.28.0
 zipp==0.6.0
 zope.interface==4.6.0
 gunicorn==19.3.0
+psycopg2-binary==2.8.4
