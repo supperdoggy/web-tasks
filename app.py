@@ -84,6 +84,8 @@ class Users(db.Model):
 def index():    
     current_user = str(session.get("user"))
     if session.get('logged_in'):
+        session["logged_in"] = True
+        session["user"] = current_user
         if request.method == "POST":
             if request.form["content"] != "":
                 task_content = request.form['content']
@@ -120,8 +122,10 @@ def newIndex():
 @app.route("/move/<int:modelClass>/<int:id>")
 def move(modelClass, id):
     if session.get('logged_in'):
+        session["logged_in"] = True
         task = getTask(modelClass, id, Todo, inProcess, Done)
         if checkOwner(session.get('user'), task.owner):
+            session["user"] = session.get('user')
             moveTask(task, db, Todo, inProcess, Done)
     return redirect("/")
 
@@ -132,8 +136,10 @@ def move(modelClass, id):
 @app.route('/delete/<int:modelClass>/<int:id>', methods=["POST", "GET"])
 def delete(modelClass, id):
     if session.get('logged_in'):
+        session["logged_in"] = True
         task = getTask(modelClass, id, Todo, inProcess, Done)
         if checkOwner(session.get('user'), task.owner):
+            session["user"] = session.get('user')
             deleteTask(task, db)
     return redirect("/")
 
@@ -143,8 +149,10 @@ def delete(modelClass, id):
 @app.route('/comment/<int:modelClass>/<int:id>', methods=["POST", "GET"])
 def commentary(modelClass, id):
     if session.get('logged_in'):
+        session["logged_in"] = True
         task = getTask(modelClass, id, Todo, inProcess, Done)
         if checkOwner(session.get('user'), task.owner):
+            session["user"] = session.get('user')
             if request.method == "POST":
                 updateComment(task, request.form["comment"], db)
                 return redirect("/")
