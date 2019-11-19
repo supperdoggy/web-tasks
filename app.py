@@ -24,6 +24,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = SQL_CFG
 db = dataBase.data(app)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
+
+app.secret_key = os.urandom(24)
+app.config['SESSION_TYPE'] = 'filesystem'
 # app.logger.addHandler(logging.StreamHandler(sys.stdout))
 # app.logger.setLevel(logging.ERROR)
 
@@ -187,6 +190,4 @@ def logout():
 # ================================= [ Register url ] ===============================================
 
 if __name__ == "__main__":
-    app.secret_key = os.urandom(24)
-    app.config['SESSION_TYPE'] = 'filesystem'
     app.run()  
