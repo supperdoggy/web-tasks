@@ -169,7 +169,7 @@ def login():
     session["logged_in"] = False
     session["user"] = None
     if request.method == "POST":
-        if checkAccess(request.form["password"], request.form["username"], Users):
+        if checkAccess(request.form["password"], str(request.form["username"]).lower, Users):
             session["logged_in"] = True
 # ?? maybe make check by unique id ??
             session["user"] = request.form["username"]
@@ -187,7 +187,7 @@ def login():
 def logout():
     if request.method == "POST":
         if request.form["username"] != "" and request.form["password"] != "":
-            addTask(Users(username=request.form["username"], password=request.form["password"], uniqueId=randomString()), db)
+            addTask(Users(username=str(request.form["username"]).lower, password=request.form["password"], uniqueId=randomString()), db)
             session["logged_in"] = True
             return redirect("/login")
         else:
