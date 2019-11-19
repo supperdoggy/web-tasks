@@ -24,6 +24,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = SQL_CFG
 db = dataBase.data(app)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 # ==============================================================================================
 # ================================ [ Models for db ] ===========================================
