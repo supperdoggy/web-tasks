@@ -11,6 +11,7 @@ defusedxml==0.6.0
 Django==2.2.5
 django-grappelli==2.13.1
 Flask==1.1.1
+Flask-WTF==0.9.4
 Flask-Login==0.4.1
 Flask-Migrate==2.5.2
 Flask-OpenID==1.2.5
@@ -22,6 +23,7 @@ future==0.18.0
 geojson==2.4.1
 gspread==3.1.0
 httplib2==0.12.3
+WTForms==1.0.5
 idna==2.8
 image==1.5.27
 importlib-metadata==0.23
@@ -80,3 +82,4 @@ wrapt==1.11.2
 yapf==0.28.0
 zipp==0.6.0
 zope.interface==4.6.0
+gunicorn==19.3.0
