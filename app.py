@@ -83,7 +83,7 @@ class Users(db.Model):
 @app.route('/', methods=["POST", "GET"])
 def index():    
     current_user = str(session.get("user"))
-    if session.get('logged_in'):
+    if session.get('logged_in') and session.get("user") != None:
         session["logged_in"] = True
         session["user"] = current_user
         if request.method == "POST":
@@ -106,7 +106,7 @@ def index():
 # ================================= [ In progress ] ==============================================
 @app.route('/tasknew')
 def newIndex():
-    if session.get('logged_in'):
+    if session.get('logged_in') and session.get("user") != None:
         current_user = str(session.get("user"))
         tasks = Todo.query.filter_by(owner=current_user).all()
         process = inProcess.query.filter_by(owner=current_user).all()
@@ -121,7 +121,7 @@ def newIndex():
 
 @app.route("/move/<int:modelClass>/<int:id>")
 def move(modelClass, id):
-    if session.get('logged_in'):
+    if session.get('logged_in') and session.get("user") != None:
         session["logged_in"] = True
         task = getTask(modelClass, id, Todo, inProcess, Done)
         if checkOwner(session.get('user'), task.owner):
@@ -135,7 +135,7 @@ def move(modelClass, id):
 
 @app.route('/delete/<int:modelClass>/<int:id>', methods=["POST", "GET"])
 def delete(modelClass, id):
-    if session.get('logged_in'):
+    if session.get('logged_in') and session.get("user") != None:
         session["logged_in"] = True
         task = getTask(modelClass, id, Todo, inProcess, Done)
         if checkOwner(session.get('user'), task.owner):
@@ -148,7 +148,7 @@ def delete(modelClass, id):
 # ================================= [ Comment url ] ================================================
 @app.route('/comment/<int:modelClass>/<int:id>', methods=["POST", "GET"])
 def commentary(modelClass, id):
-    if session.get('logged_in'):
+    if session.get('logged_in') and session.get("user") != None:
         session["logged_in"] = True
         task = getTask(modelClass, id, Todo, inProcess, Done)
         if checkOwner(session.get('user'), task.owner):
@@ -166,8 +166,7 @@ def commentary(modelClass, id):
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
-    session["logged_in"] = False
-    session["user"] = None
+    session["logged_in"] = False\
     if request.method == "POST":
         if checkAccess(request.form["password"], request.form["username"], Users):
             session["logged_in"] = True
