@@ -25,7 +25,7 @@ db = dataBase.data(app)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
-app.secret_key = "dsahfjsahfj3l4yrgfhasnmbfhsjalgwegrhajl"
+app.secret_key = "KbV5qPvUtn6Og4jZBiLbNMQIS"
 app.config['SESSION_TYPE'] = 'filesystem'
 # app.logger.addHandler(logging.StreamHandler(sys.stdout))
 # app.logger.setLevel(logging.ERROR)
