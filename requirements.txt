@@ -77,5 +77,5 @@ wrapt==1.11.2
 yapf==0.28.0
 zipp==0.6.0
 zope.interface==4.6.0
-gunicorn==19.3.0
+gunicorn==19.5.0
 psycopg2-binary==2.8.4
