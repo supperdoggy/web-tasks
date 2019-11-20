@@ -25,7 +25,7 @@ db = dataBase.data(app)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
-app.secret_key = "KbV5qPvUtn6Og4jZBiLbNMQIS"
+app.secret_key = secret_key
 app.config['SESSION_TYPE'] = 'filesystem'
 # app.logger.addHandler(logging.StreamHandler(sys.stdout))
 # app.logger.setLevel(logging.ERROR)
@@ -116,6 +116,16 @@ def newIndex():
         return redirect('/login')
 
 # ================================= [ In progress ] ================================================
+# ==================================================================================================
+# =============================== [ New login screen ] =============================================
+@app.rounte('/newlogin')
+def newLogin():
+    if session.get('logged_in'):
+        return render_template("login_new.html")
+    else:
+        return redirect("/login")
+
+# =============================== [ New login screen ] =============================================
 # ==================================================================================================
 # ================================= [ Moving url ] =================================================
 
