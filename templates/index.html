@@ -89,7 +89,7 @@ a {
                 <td>{{task.date_created.date()}}</td>
                 <td>
                     <form action="/delete/{{task.modelClass}}/{{task.id}}">
-                        <input type="submit" value="Delete">
+                        <input type="submit" value="Delete!">
                     </form>
                     <form action="/move/{{task.modelClass}}/{{task.id}}">
                         <input type="submit" value="Move to in progress">
@@ -122,7 +122,7 @@ a {
                 <td>{{process.date_created.date()}}</td>
                 <td>
                     <form action="/delete/{{process.modelClass}}/{{process.id}}">
-                        <input type="submit" value="Delete">
+                        <input type="submit" value="Delete!">
                     </form>
                     <form action="/move/{{process.modelClass}}/{{process.id}}">
                         <input type="submit" value="Done!">
@@ -153,7 +153,7 @@ a {
                 <td>{{done.date_created.date()}}</td>
                 <td>
                     <form action="/delete/{{done.modelClass}}/{{done.id}}">
-                        <input type="submit" value="Delete">
+                        <input type="submit" value="Delete!">
                     </form>
                 </td>
             </tr>
