@@ -9,30 +9,33 @@
 </head>
 <body>
 <div class="main">
-
+<form action="/login" method="POST">
     <div class="order">
-    <div class="line"><div class="form-item">
-    <input type="name" class="form-input" required>
-    <label class="form-label">e-mail</label>
-  </div>
-        <div class="line_orange"></div>
-</div>
-    <div class="line"><div class="form-item">
-    <input type="phone_number" class="form-input" required>
-    <label class="form-label">password</label>
-  </div>
-        <div class="line_orange"></div>
+        <div class="line"><div class="form-item">
+        <input type="name" class="form-input" placeholder="username" name="username" required>
+        <label class="form-label">username</label>
+      </div>
+            <div class="line_orange"></div>
+    </div>
+        <div class="line"><div class="form-item">
+        <input type="password" class="form-input" placeholder="password" name="password" required>
+        <label class="form-label">password</label>
+      </div>
+            <div class="line_orange"></div>
+            </div>
         </div>
-    </div>
-    <div class="sign_div">
-    <div class="send">
-    <p><input class="send_button" type="button" value="Sign in"><a href=""></a></p>
-    </div>
+        <div class="sign_div">
         <div class="send">
-            <a href="">
-    <p><input class="send_button" type="button" value="Сhart"></p></a>
-    </div>
+        <p><input class="send_button" type="submit" value="Sign in"><a href=""></a></p>
         </div>
-    </div>
+            <div class="send">
+                <a href="">
+            
+        <p><a href="/register" class="send_button">register</a></p></a>
+        </div>
+            </div>
+        
+</form>
+</div>
     </body>
 </html>
