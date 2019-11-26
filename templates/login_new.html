@@ -12,13 +12,13 @@
 <form action="/login" method="POST">
     <div class="order">
         <div class="line"><div class="form-item">
-        <input type="name" class="form-input" placeholder="username"  required>
+        <input type="name" class="form-input"  name="username" required>
         <label class="form-label">username</label>
       </div>
             <div class="line_orange"></div>
     </div>
         <div class="line"><div class="form-item">
-        <input type="password" class="form-input" placeholder="password" name="password" required>
+        <input type="password" class="form-input" name="password" required>
         <label class="form-label">password</label>
       </div>
             <div class="line_orange"></div>
@@ -31,7 +31,7 @@
             <div class="send">
                 <a href="">
             
-        <p><a href="/register" class="send_button">register</a></p></a>
+        <p><input class="send_button" type="button" value="Register"><a href="/register"></a></p></a>
         </div>
             </div>
         
