@@ -185,9 +185,9 @@ def login():
             session["user"] = request.form["username"]
             return redirect("/")
         else:
-            return redirect("/login")
+            return redirect("/newlogin")
     else:
-        return render_template('login.html')
+        return render_template('login_new.html')
 
 # ================================= [ Login url ] ==================================================
 # ==================================================================================================
@@ -199,9 +199,9 @@ def logout():
         if request.form["username"] != "" and request.form["password"] != "":
             addTask(Users(username=str(request.form["username"]).lower(), password=request.form["password"], uniqueId=randomString()), db)
             session["logged_in"] = True
-            return redirect("/login")
+            return redirect("/newlogin")
         else:
-            return redirect("/login")
+            return redirect("/newlogin")
     else:
         return render_template("register.html")
 
