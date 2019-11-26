@@ -99,7 +99,7 @@ def index():
             return render_template('index.html', tasks=tasks, process=process, done=done)
     
     else:
-        return redirect("/newlogin")
+        return redirect("/login")
 
 # ================================= [ Index page ] ===============================================
 # =========================== [ New index page for tasks ] =======================================
@@ -113,7 +113,7 @@ def newIndex():
         done = Done.query.filter_by(owner=current_user).all()
         return render_template("new_index.html", task=tasks, process=process, done=done)
     else:
-        return redirect('/newlogin')
+        return redirect('/login')
 
 # ================================= [ In progress ] ================================================
 # ==================================================================================================
@@ -185,9 +185,9 @@ def login():
             session["user"] = request.form["username"]
             return redirect("/")
         else:
-            return redirect("/newlogin")
+            return redirect("/login")
     else:
-        return render_template('login_new.html')
+        return render_template('login.html')
 
 # ================================= [ Login url ] ==================================================
 # ==================================================================================================
@@ -199,9 +199,9 @@ def logout():
         if request.form["username"] != "" and request.form["password"] != "":
             addTask(Users(username=str(request.form["username"]).lower(), password=request.form["password"], uniqueId=randomString()), db)
             session["logged_in"] = True
-            return redirect("/newlogin")
+            return redirect("/login")
         else:
-            return redirect("/newlogin")
+            return redirect("/login")
     else:
         return render_template("register.html")
 
