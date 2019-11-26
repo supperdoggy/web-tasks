@@ -99,7 +99,7 @@ def index():
             return render_template('index.html', tasks=tasks, process=process, done=done)
     
     else:
-        return redirect("/login")
+        return redirect("/newlogin")
 
 # ================================= [ Index page ] ===============================================
 # =========================== [ New index page for tasks ] =======================================
@@ -113,7 +113,7 @@ def newIndex():
         done = Done.query.filter_by(owner=current_user).all()
         return render_template("new_index.html", task=tasks, process=process, done=done)
     else:
-        return redirect('/login')
+        return redirect('/newlogin')
 
 # ================================= [ In progress ] ================================================
 # ==================================================================================================
