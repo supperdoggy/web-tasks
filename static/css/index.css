@@ -98,7 +98,35 @@ img {
   -webkit-transition: opacity .35s;
   
 }
-
+.sign_in_button {
+	text-decoration: none;
+	outline: none;
+	display: inline-block;
+	width: 140px;
+	height: 45px;
+	line-height: 45px;
+	border-radius: 45px;
+	margin: 10px 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 11px;
+	text-transform: uppercase;
+	text-align: center;
+	letter-spacing: 3px;
+	font-weight: 600;
+	color: #524f4e;
+	  position:absolute;
+	  right:0px;
+	  top:10px;
+	background: white;
+	box-shadow: 0 8px 15px rgba(0,0,0,.1);
+	transition: .3s;
+  }
+  .sign_in_button:hover {
+	background: rgb(255,124,0);
+	box-shadow: linear-gradient(to right, rgb(255,124,0), rgb(249,187,0));
+	color: white;
+	transform: translateY(-7px);
+  }
 .button {
     border: none;
     display: inline-block;
