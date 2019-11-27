@@ -118,3 +118,10 @@ input[type='text']{
   -ms-transform: scale(0.95);
   transform: scale(0.95);
 }
+
+@media (max-width: 600px){
+  label{
+    font-size: 10px;
+    letter-spacing: 3px;
+  }
+}
