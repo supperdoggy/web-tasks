@@ -2,12 +2,6 @@ body, html {
     margin: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-
-body, html {
-    margin: 0;
-    font-family: sans-serif;
-}
-
 .content {
     margin: 0 auto;
     width: 400px;
@@ -32,7 +26,14 @@ td {
 }
 
 .form {
-    margin-top: 20px;
+	margin-top: 20px;
+	width: 360px;
+	background: #fff;
+	font: inherit;
+	box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
+	border: 0;
+	outline: 0;
+	padding: 19px 18px;
 }
 
 #content {
@@ -61,43 +62,6 @@ td {
 	margin-left: -96px;
 }
 
-
-.form {	
-	width: 360px;
-	background: #fff;
-	font: inherit;
-	box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
-	border: 0;
-	outline: 0;
-	padding: 19px 18px;
-}
-
-@import url(https://fonts.googleapis.com/css?family=Oswald:400);
-
-.navigation {
-  width: 100%;
-  background-color: black;
-}
-
-img {
-  width: 25px;
-  border-radius: 50px;
-  float: left;
-}
-
-.logout {
-  font-size: .8em;
-  font-family: 'Oswald', sans-serif;
-	position: relative;
-  right: -18px;
-  bottom: -4px;
-  overflow: hidden;
-  letter-spacing: 3px;
-  opacity: 0;
-  transition: opacity .45s;
-  -webkit-transition: opacity .35s;
-  
-}
 .sign_in_button {
 	text-decoration: none;
 	outline: none;
@@ -127,31 +91,4 @@ img {
 	color: white;
 	transform: translateY(-7px);
   }
-.button {
-    border: none;
-    display: inline-block;
-	text-decoration: none;
-	float: right;
-  padding: 12px;
-  margin: 15px;
-  color: white;
-  width: 25px;
-  background-color: rgba(15, 158, 253, 0.788);
-  transition: width .35s;
-  -webkit-transition: width .35s;
-  overflow: hidden;
-  border-radius: 4;
-}
-
-a:hover {
-  width: 100px;
-}
-
-a:hover .logout{
-  opacity: .9;
-}
-
-a {
-  text-decoration: none;
-}
 
