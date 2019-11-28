@@ -30,7 +30,7 @@
 textarea {
   resize: none;
   height:auto;
-  max-height: 300;
+  max-height: 300px;
   max-width:500px;
   color:#999;
   font-weight:350;
@@ -93,7 +93,7 @@ body {
     <a href="/" style="color: #000000;text-decoration:none;" ><h1 style="text-align: center;font-size: 40px;">{{task.content}}</h1></a>
     <form action="/comment/{{task.modelClass}}/{{task.id}}" method="POST">
         <div class="textarea" style="text-align: center;">
-            <textarea class="textarea"  spellcheck="false" ng-model="loremIpsum" ng-keyup="autoExpand($event)" name="comment" style="width: 400px; height: 500px;" id="comment">{{task.comment}}</textarea>
+            <textarea class="textarea"  spellcheck="false" ng-model="loremIpsum" ng-keyup="autoExpand($event)" name="comment" style="width: 350px; height: 400px;" id="comment">{{task.comment}}</textarea>
         </div>
         <br>
         <div style="text-align: center;">
