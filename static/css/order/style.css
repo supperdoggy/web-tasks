@@ -1,23 +1,11 @@
-html, body, img{
-  margin:0;
-  padding:0;
-}
+
  html { overflow-x: hidden; }
 /*
    div {
     min-width:  800px;  Минимальная  ширина 
    }
 */
-.main{
-    margin: 0;
-/*    background: yellow;*/
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
-    
-}
+
 .order{
     width:400px;
     height:200px;
@@ -117,11 +105,4 @@ input[type='text']{
   -webkit-transform: scale(0.95);
   -ms-transform: scale(0.95);
   transform: scale(0.95);
-}
-
-@media (max-width: 600px){
-  label{
-    font-size: 10px;
-    letter-spacing: 3px;
-  }
 }
