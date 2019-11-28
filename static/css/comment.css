@@ -16,7 +16,7 @@
 	padding: 12px 36px;
 	box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, .2);	
 }
-textarea {
+.textarea {
   resize: none;
   height:auto;
   max-width:600px;
