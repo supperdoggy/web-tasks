@@ -6,28 +6,6 @@
    }
 */
 
-
-.form-input {
-  width: 100%;
-  height: 50px;
-  padding: 5px 15px;
-  border-width:0;
-    outline: 0;
-    outline-offset: 0;
-   color:rgb(255,124,0);
-  font:168% Comfortaa; 
-}
-
-.form-label {
-  color:rgb(255,124,0);
-  font:200% Comfortaa;
-  position: absolute;
-  pointer-events: none;
-  left: 15px;
-  top: 0;
-  line-height: 40px;
-  transition: .3s;
-}
 .line_orange{
     width:100%;
     height:2px;
