@@ -75,16 +75,15 @@ def getTask(modelId, id, Todo, inProcess, Done):
     return task
 
 def checkAccess(password, username,Users):
-    # i = 1
-    # try:
-    #     while True:
-    #         if str(Users.query.get_or_404(i).username).lower()== username and  Users.query.get_or_404(i).password == password:
-    #             return True
-    #         else:
-    #             i += 1
-    # except:
-    #     return False
-    return True
+    i = 1
+    try:
+        while True:
+            if str(Users.query.get_or_404(i).username).lower()== username and  Users.query.get_or_404(i).password == password:
+                return True
+            else:
+                i += 1
+    except:
+        return False
 
 def randomString(stringLenght=24):
     return ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(stringLenght))
