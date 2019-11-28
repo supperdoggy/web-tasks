@@ -83,7 +83,7 @@ class Users(db.Model):
 @app.route('/', methods=["POST", "GET"])
 def index():    
     current_user = str(session.get("user"))
-    if session.get('logged_in'):
+    if not session.get('logged_in'):
         session["logged_in"] = True
         session["user"] = current_user
         if request.method == "POST":
