@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
+<link rel="stylesheet" href="static/css/comment.css">
 <link rel="stylesheet" href="static/css/bg.css">
 <script src="scripts/bg.js"></script>
 <title>{{task.content}}</title>
@@ -13,8 +14,8 @@
 <div class="content">
     <a href="/" style="color: #000000;text-decoration:none;" ><h1 style="text-align: center;font-size: 40px;">{{task.content}}</h1></a>
     <form action="/comment/{{task.modelClass}}/{{task.id}}" method="POST">
-        <div class="textarea" style="text-align: center;">
-            <textarea class="textarea"  spellcheck="false" ng-model="loremIpsum" ng-keyup="autoExpand($event)" name="comment" style="width: 400px; height: 500px;" id="comment">{{task.comment}}</textarea>
+        <div class="textarea">
+            <textarea class="textarea"  spellcheck="false" ng-model="loremIpsum" ng-keyup="autoExpand($event)" name="comment" id="comment">{{task.comment}}</textarea>
         </div>
         <br>
         <div style="text-align: center;">
