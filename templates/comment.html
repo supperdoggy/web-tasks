@@ -89,7 +89,7 @@ body {
 {% block body %}
 
 
-<div class="content">
+<div style="text-align: center;">
     <a href="/" style="color: #000000;text-decoration:none;" ><h1 style="text-align: center;font-size: 40px;">{{task.content}}</h1></a>
     <form action="/comment/{{task.modelClass}}/{{task.id}}" method="POST">
         <div class="textarea" style="text-align: center;">
