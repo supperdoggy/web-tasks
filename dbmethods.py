@@ -74,11 +74,11 @@ def getTask(modelId, id, Todo, inProcess, Done):
     
     return task
 
-def checkAccess(password, username,Users):
+def checkAccess(password, username, Users):
     i = 1
     try:
         while True:
-            if str(Users.query.get_or_404(i).username).lower()== username and  Users.query.get_or_404(i).password == password:
+            if str(Users.query.get_or_404(i).username).lower() == username and  Users.query.get_or_404(i).password == password:
                 return True
             else:
                 i += 1
