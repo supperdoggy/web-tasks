@@ -178,7 +178,7 @@ def login():
     session["logged_in"] = False
     session["user"] = None
     if request.method == "POST":
-        if checkAccess(request.form["password"], request.form["username"], Users):
+        if checkAccess(request.form["password"], request.form["username"], Users.query.all()):
             session["logged_in"] = True
             session["user"] = request.form["username"]
             return redirect("/")
