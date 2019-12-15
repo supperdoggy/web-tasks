@@ -79,8 +79,7 @@ def checkAccess(password, username, Users):
     for n in Users:
         if n.username == username.lower() and n.password == password:
             return True
-        else:
-            return False
+    return False
 
 def randomString(stringLenght=24):
     return ''.join(random.SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(stringLenght))
