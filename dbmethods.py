@@ -77,7 +77,7 @@ def getTask(modelId, id, Todo, inProcess, Done):
 def checkAccess(password, username, Users):
     i = 1
     for n in Users:
-        if n.username == username and n.password == password:
+        if n.username == username.lower() and n.password == password:
             return True
         else:
             return False
