@@ -18,6 +18,25 @@ Fronend: html, css, js
 # Принцип роботи
 В базі данних присутні 4 моделі: Users - модель з інформацією про користувачів, Todo - модель для запланованих справ, inProcess - модель для справ, які в процесі виконання і Done - модель для виконаних справ. Також присутнє шифрування данних cookie для того щоб забезпечити захист інформації. 
 
+Налаштування
+
+```python
+# Оголошуємо перемінну app та даємо посилання на папку з html
+app = Flask(__name__, template_folder="templates")
+# Підключаємо базу даних
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+# Оголошуємо базу даних
+db = dataBase.data(app)
+# Підключаємо login_manager
+login_manager = flask_login.LoginManager()
+login_manager.init_app(app)
+
+# Оголошуємо ключ шифрування
+app.secret_key = secret_key
+
+app.config['SESSION_TYPE'] = 'filesystem'
+```
+
 Посиланяння "/" відповідає за основну сторінку. На ній відображені справи конкретно цього користувача
 ``` python
 @app.route('/', methods=["POST", "GET"])
