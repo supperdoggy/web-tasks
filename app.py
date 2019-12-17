@@ -102,29 +102,6 @@ def index():
         return redirect("/login")
 
 # ================================= [ Index page ] ===============================================
-# =========================== [ New index page for tasks ] =======================================
-# ================================= [ In progress ] ==============================================
-@app.route('/tasknew')
-def newIndex():
-    if session.get('logged_in'):
-        current_user = str(session.get("user"))
-        tasks = Todo.query.filter_by(owner=current_user).all()
-        process = inProcess.query.filter_by(owner=current_user).all()
-        done = Done.query.filter_by(owner=current_user).all()
-        return render_template("new_index.html", task=tasks, process=process, done=done)
-    else:
-        return redirect('/login')
-
-# ================================= [ In progress ] ================================================
-# ==================================================================================================
-# =============================== [ New login screen ] =============================================
-@app.route('/newlogin')
-def newLogin():
-    if session.get('logged_in'):
-        return render_template("login_new.html")
-    else:
-        return redirect("/login")
-# =============================== [ New login screen ] =============================================
 # ==================================================================================================
 # ================================= [ Moving url ] =================================================
 
