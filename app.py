@@ -164,7 +164,7 @@ def login():
             session["error"] = None
             return redirect("/")
         else:
-            error["error"] = "Invalid username or password. Try again"
+            session["error"] = "Invalid username or password. Try again"
             return redirect("login.html")
     else:
         return render_template('login.html', error=error)
