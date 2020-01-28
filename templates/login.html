@@ -9,6 +9,13 @@
 
 {% block body %}
 <form action="/login" method="POST">
+    {% if error %}
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{error}}
+      </div>
+    {% endif %}
+    
     <div style="text-align: center;">
     <div class="login">
     <div class="login-screen">

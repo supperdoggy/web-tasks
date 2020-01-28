@@ -15,6 +15,7 @@ import flask_login
 # TODO: ?? create pages with their own Dodo's ??
 # TODO: error handling
 # TODO: register via email
+# TODO: create an error message
 
 # ================================ [ TODOs ] ===================================================
 # ==============================================================================================
@@ -152,17 +153,21 @@ def commentary(modelClass, id):
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
+    # finish error message !!!@!!!!!!!
+    error = session.get("error")
     session["logged_in"] = False
     session["user"] = None
     if request.method == "POST":
         if checkAccess(request.form["password"], request.form["username"], Users.query.all()):
             session["logged_in"] = True
             session["user"] = request.form["username"]
+            sessio["error"] = None
             return redirect("/")
         else:
-            return redirect("/login")
+            error["error"] = "Invalid username or password. Try again"
+            return redirect("login.html")
     else:
-        return render_template('login.html')
+        return render_template('login.html', error=error)
 
 # ================================= [ Login url ] ==================================================
 # ==================================================================================================
@@ -170,11 +175,17 @@ def login():
 
 @app.route("/register", methods=["POST", "GET"])
 def logout():
+    error = session.get("error")
     if request.method == "POST":
         if request.form["username"] != "" and request.form["password"] != "":
-            addTask(Users(username=str(request.form["username"]).lower(), password=request.form["password"], uniqueId=randomString()), db)
-            session["logged_in"] = True
-            return redirect("/login")
+            # check if username is taken
+            if not inDB(Users, request.form["username"].lower()): 
+
+                addTask(Users(username=str(request.form["username"]).lower(), password=request.form["password"], uniqueId=randomString()), db)
+                session["logged_in"] = True
+                return redirect("/login")
+            else:
+                session["error"] = "Username is already taken. Try something different"
         else:
             return redirect("/login")
     else:

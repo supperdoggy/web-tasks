@@ -32,6 +32,12 @@ def checkIfExists(username, Users):
     except:
         return False
 
+def inDB(Users, username):
+    for n in Users:
+        if n.username == username:
+            return True
+    return False
+
 def addTask(task, db):
     try:
         db.session.add(task)
