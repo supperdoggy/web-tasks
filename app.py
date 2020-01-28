@@ -156,7 +156,8 @@ def login():
     error = session.get("error")
 
     if error == "Username is already taken. Try something different":
-        session["error"], error = None
+        session["error"] = None
+        error = None
 
     session["logged_in"] = False
     session["user"] = None
@@ -181,7 +182,8 @@ def logout():
     error = session.get("error")
 
     if error == "Invalid username or password. Try again":
-        session["error"], error = None
+        session["error"] = None
+        error = None
 
     if request.method == "POST":
         if request.form["username"] != "" and request.form["password"] != "":
