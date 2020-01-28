@@ -34,7 +34,7 @@ def checkIfExists(username, Users):
 
 def inDB(Users, username):
     users = Users.query.all()
-    for n in Users:
+    for n in users:
         if n.username == username:
             return True
     return False
