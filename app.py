@@ -192,6 +192,7 @@ def logout():
                 session["error"] = None   
             else:
                 session["error"] = "Username is already taken. Try something different"
+                return redirect("/register")
         return redirect("/login")
     else:
         return render_template("register.html", error=error)
