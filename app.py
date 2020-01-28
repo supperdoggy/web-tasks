@@ -161,7 +161,7 @@ def login():
         if checkAccess(request.form["password"], request.form["username"], Users.query.all()):
             session["logged_in"] = True
             session["user"] = request.form["username"]
-            sessio["error"] = None
+            session["error"] = None
             return redirect("/")
         else:
             error["error"] = "Invalid username or password. Try again"
