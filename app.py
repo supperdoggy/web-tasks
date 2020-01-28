@@ -155,6 +155,10 @@ def commentary(modelClass, id):
 def login():
     # finish error message !!!@!!!!!!!
     error = session.get("error")
+
+    if error.__contains__("already"):
+        session["error"], error == None
+
     session["logged_in"] = False
     session["user"] = None
     if request.method == "POST":
@@ -176,6 +180,10 @@ def login():
 @app.route("/register", methods=["POST", "GET"])
 def logout():
     error = session.get("error")
+
+    if error.__contains__("Invalid"):
+        session["error"], error == None
+
     if request.method == "POST":
         if request.form["username"] != "" and request.form["password"] != "":
             # check if username is taken
@@ -188,7 +196,7 @@ def logout():
         else:
             return redirect("/login")
     else:
-        return render_template("register.html")
+        return render_template("register.html", error=error)
 
 # ================================= [ Register url ] ===============================================
 
