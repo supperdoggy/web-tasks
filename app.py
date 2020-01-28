@@ -180,7 +180,6 @@ def logout():
         if request.form["username"] != "" and request.form["password"] != "":
             # check if username is taken
             if not inDB(Users, request.form["username"].lower()): 
-
                 addTask(Users(username=str(request.form["username"]).lower(), password=request.form["password"], uniqueId=randomString()), db)
                 session["logged_in"] = True
                 return redirect("/login")
