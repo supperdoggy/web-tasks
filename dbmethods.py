@@ -33,6 +33,7 @@ def checkIfExists(username, Users):
         return False
 
 def inDB(Users, username):
+    users = Users.query.all()
     for n in Users:
         if n.username == username:
             return True
