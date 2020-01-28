@@ -8,6 +8,13 @@
 {% endblock %}
 
 {% block body %}
+
+{% if error %}
+<div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {{error}}
+  </div>
+{% endif %}
 <form action="/login" method="POST">
     
     <div style="text-align: center;">
@@ -34,12 +41,6 @@
     </div>
 </form>
 
-{% if error %}
-<div class="alert">
-    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-    {{error}}
-  </div>
-{% endif %}
 {% endblock %}
 
 
