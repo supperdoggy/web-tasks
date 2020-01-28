@@ -15,7 +15,6 @@ import flask_login
 # TODO: ?? create pages with their own Dodo's ??
 # TODO: error handling
 # TODO: register via email
-# TODO: create an error message
 
 # ================================ [ TODOs ] ===================================================
 # ==============================================================================================
