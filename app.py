@@ -189,12 +189,10 @@ def logout():
             if not inDB(Users, request.form["username"].lower()): 
                 addTask(Users(username=str(request.form["username"]).lower(), password=request.form["password"], uniqueId=randomString()), db)
                 session["logged_in"] = True
-                session["error"] = None
-                return redirect("/login")
+                session["error"] = None   
             else:
                 session["error"] = "Username is already taken. Try something different"
-        else:
-            return redirect("/login")
+        return redirect("/login")
     else:
         return render_template("register.html", error=error)
 
