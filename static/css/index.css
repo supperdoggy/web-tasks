@@ -25,41 +25,9 @@ td {
     padding: 5px;
 }
 
-.form {
-	margin-top: 20px;
-	width: 360px;
-	background: #fff;
-	font: inherit;
-	box-shadow: 0 6px 10px 0 rgba(0, 0, 0 , .1);
-	border: 0;
-	outline: 0;
-	padding: 19px 18px;
-}
 
 #content {
     width: 70%;
-}
-
-.btn {
-	display: inline-block;
-	background: transparent;
-	color: inherit;
-	font: inherit;
-	border: 0;
-	outline: 0;
-	padding: 0;
-	transition: all 200ms ease-in;
-	cursor: pointer;
-	
-	background: rgb(214, 43, 163);
-	color: #ffffffd5;
-	box-shadow: 0 0 10px 2px rgba(192, 80, 80, 0.1);
-	border-radius: 2px;
-	padding: 12px 36px;
-	
-	
-	box-shadow: inset 0 0 10px 2px rgba(0, 0, 0, .2);	
-	margin-left: -96px;
 }
 
 .sign_in_button {
@@ -92,3 +60,23 @@ td {
 	transform: translateY(-7px);
   }
 
+/* new front-end */
+.back{
+	border-radius: 25px;
+	background: white;
+	padding: 20px;
+	width: 80%;
+  
+  }
+  
+  .column {
+	float: left;
+	width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+	content: "";
+	display: table;
+	clear: both;
+  }

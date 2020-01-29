@@ -15,20 +15,19 @@ import flask_login
 # TODO: ?? create pages with their own Dodo's ??
 # TODO: error handling
 # TODO: register via email
+# TODO: new front-end
 
 # ================================ [ TODOs ] ===================================================
 # ==============================================================================================
 
 app = Flask(__name__, template_folder="templates")
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+app.config['SQLALCHEMY_DATABASE_URI'] = LOCALDB # CHANGE BEFORE DEPLOY
 db = dataBase.data(app)
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
 
 app.secret_key = secret_key
 app.config['SESSION_TYPE'] = 'filesystem'
-# app.logger.addHandler(logging.StreamHandler(sys.stdout))
-# app.logger.setLevel(logging.ERROR)
 
 # ==============================================================================================
 # ================================ [ Models for db ] ===========================================
@@ -152,8 +151,9 @@ def commentary(modelClass, id):
 
 @app.route('/login', methods=["POST", "GET"])
 def login():
+    
+    # error notification
     error = session.get("error")
-
     if error == "Username is already taken. Try something different":
         session["error"] = None
         error = None
@@ -178,8 +178,9 @@ def login():
 
 @app.route("/register", methods=["POST", "GET"])
 def logout():
-    error = session.get("error")
 
+    # error notification
+    error = session.get("error")
     if error == "Invalid username or password. Try again":
         session["error"] = None
         error = None
@@ -201,4 +202,4 @@ def logout():
 # ================================= [ Register url ] ===============================================
 
 if __name__ == "__main__":
-    app.run()  
+    app.run(debug=True)  

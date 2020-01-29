@@ -11,104 +11,125 @@
 
 {% block body %}
 <div><a class="sign_in_button" href="/login">Logout</a></div>
-
-<div class="content">
-    <h1 style="text-align: center">Tasks</h1>
-
-    <table>
-        <tr>
-            <th>Task</th>
-            <th>Added</th>
-            <th>Actions</th>
-        </tr>
-        {% for task in tasks %}        
-            <tr>
-                <td><a style="color: #000000;text-decoration:none" href="/comment/{{task.modelClass}}/{{task.id}}">{{task.content}}</a></td>
-                <td>{{task.date_created.date()}}</td>
-                <td>
-                    <form action="/delete/{{task.modelClass}}/{{task.id}}">
-                        <input type="submit" value="Delete!">
-                    </form>
-                    <form action="/move/{{task.modelClass}}/{{task.id}}">
-                        <input type="submit" value="Move to in progress">
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-
-
-    </table>
-
-    <form action="/" method="POST">
-        <input class="form" type="text" name="content" id="content">
-        <input class="btn" type="submit" value="add task">
-    </form>
-
+    <div class="row">
+        <div class="column">
+            <h1 style="text-align: center">Tasks</h1>
+            <div class="back">
+                <div style="text-align: center;">
+                    <div class="row">
+                        <div class="column">
+                            <h3 style="font-family:Arial, Helvetica, sans-serif;">Task</h3>
+                        </div>
+                        <div class="column">
+                            <h3 style="font-family:Arial, Helvetica, sans-serif;">Added</h3>
+                        </div>
+                        <div class="column">
+                            <h3 style="font-family:Arial, Helvetica, sans-serif;">Actions</h3>
+                        </div>
+                    </div>
+                </div>
+        
+                    {% for task in tasks %}   
+                        <a style="color: #000000;text-decoration:none;font-family: Arial, Helvetica, sans-serif;" href="/comment/{{task.modelClass}}/{{task.id}}">{{task.content}}</a>
+                        <h4>{{task.date_created.date()}}</h4>
+        
+                        <form action="/delete/{{task.modelClass}}/{{task.id}}">
+                            <input type="submit" value="Delete!">
+                        </form>
+                        <form action="/move/{{task.modelClass}}/{{task.id}}">
+                            <input type="submit" value="Move to in progress">
+                        </form>
+                        <br>                
+                    {% endfor %}
+            </div>
+        
+        
+            <form action="/" method="POST">
+                <input type="text" name="content" id="content">
+                <input type="submit" value="add task">
+            </form>
+        
+            
+            <br>
+        </div>
+        <div class="column">
+            <h1 style="text-align: center">In progress</h1>
     
-    <br>
+            <div class="back">        
+            <div style="text-align: center;">
+                <div class="row">
+                    <div class="column">
+                        Task
+                    </div>
+                    <div class="column">
+                        Added
+                    </div>
+                    <div class="column">
+                        Actions
+                    </div>
+                </div>
+            </div>
+        
+        
+                <table>
+        
+                    {% for process in process %}        
+                        <tr>
+                            <td><a style="color: #000000;text-decoration:none" href="/comment/{{process.modelClass}}/{{process.id}}">{{process.content}}</a></td>
+                            <td>{{process.date_created.date()}}</td>
+                            <td>
+                                <form action="/delete/{{process.modelClass}}/{{process.id}}">
+                                    <input type="submit" value="Delete!">
+                                </form>
+                                <form action="/move/{{process.modelClass}}/{{process.id}}">
+                                    <input type="submit" value="Done!">
+                                </form>
+                                
+                            </td>
+                        </tr>
+                    {% endfor %}
+            
+            
+                </table>
+            </div>
+        </div>
+        <div class="column">
+    
+            <h1 style="text-align: center">Done</h1>
+            <div class="back">
+                <div style="text-align: center;">
+                    <div class="row">
+                        <div class="column">
+                            Task
+                        </div>
+                        <div class="column">
+                            Added
+                        </div>
+                        <div class="column">
+                            Actions
+                        </div>
+                    </div>
+                </div>
+        
+                <table>
+                    {% for done in done %}        
+                        <tr>
+                            <td><a style="color: #000000;text-decoration:none" href="/comment/{{done.modelClass}}/{{done.id}}">{{done.content}}</a></td>
+                            <td>{{done.date_created.date()}}</td>
+                            <td>
+                                <form action="/delete/{{done.modelClass}}/{{done.id}}">
+                                    <input type="submit" value="Delete!">
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+            
+            
+                </table>
+            </div>
+        </div>
+    </div> 
 
-    <h1 style="text-align: center">In progress</h1>
-
-    <table>
-        <tr>
-            <th>Task</th>
-            <th>Added</th>
-            <th>Actions</th>
-        </tr>
-        {% for process in process %}        
-            <tr>
-                <td><a style="color: #000000;text-decoration:none" href="/comment/{{process.modelClass}}/{{process.id}}">{{process.content}}</a></td>
-                <td>{{process.date_created.date()}}</td>
-                <td>
-                    <form action="/delete/{{process.modelClass}}/{{process.id}}">
-                        <input type="submit" value="Delete!">
-                    </form>
-                    <form action="/move/{{process.modelClass}}/{{process.id}}">
-                        <input type="submit" value="Done!">
-                    </form>
-                    
-                </td>
-            </tr>
-        {% endfor %}
-
-
-    </table>
-
-    <br>
-    <br>
-    <br>
-
-    <h1 style="text-align: center">Done</h1>
-
-    <table>
-        <tr>
-            <th>Task</th>
-            <th>Added</th>
-            <th>Actions</th>
-        </tr>
-        {% for done in done %}        
-            <tr>
-                <td><a style="color: #000000;text-decoration:none" href="/comment/{{done.modelClass}}/{{done.id}}">{{done.content}}</a></td>
-                <td>{{done.date_created.date()}}</td>
-                <td>
-                    <form action="/delete/{{done.modelClass}}/{{done.id}}">
-                        <input type="submit" value="Delete!">
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-
-
-    </table>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-</div>
 
 {% endblock %}
 
