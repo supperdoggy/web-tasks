@@ -14,118 +14,98 @@
     <div class="row">
         <div class="column">
             <h1 style="text-align: center">Tasks</h1>
-            <div class="back">
-                <div style="text-align: center;">
-                    <div class="row">
-                        <div class="column">
-                            <h3 style="font-family:Arial, Helvetica, sans-serif;">Task</h3>
-                        </div>
-                        <div class="column">
-                            <h3 style="font-family:Arial, Helvetica, sans-serif;">Added</h3>
-                        </div>
-                        <div class="column">
-                            <h3 style="font-family:Arial, Helvetica, sans-serif;">Actions</h3>
-                        </div>
-                    </div>
-                </div>
+                <div class="back">
         
                     {% for task in tasks %}   
-                        <a style="color: #000000;text-decoration:none;font-family: Arial, Helvetica, sans-serif;" href="/comment/{{task.modelClass}}/{{task.id}}">{{task.content}}</a>
-                        <h4>{{task.date_created.date()}}</h4>
-        
-                        <form action="/delete/{{task.modelClass}}/{{task.id}}">
-                            <input type="submit" value="Delete!">
-                        </form>
-                        <form action="/move/{{task.modelClass}}/{{task.id}}">
-                            <input type="submit" value="Move to in progress">
-                        </form>
-                        <br>                
+                        <div style="text-align: center;">
+                            <a style="color: #000000;text-decoration:none;font-family: Arial, Helvetica, sans-serif;font-size: large;" href="/comment/{{task.modelClass}}/{{task.id}}">{{task.content}}</a>
+                        </div>
+                        <h5 style="text-align: center;">{{task.date_created.date()}}</h5>
+                        <div class="row">
+                            <div style="text-align: center;">
+                                <div class="left">
+                                    <form action="/delete/{{task.modelClass}}/{{task.id}}">
+                                        <input class="buttonFalse" type="submit" value="Delete!">
+                                    </form>
+                                </div>
+                                
+                                <div class="right">
+                                    <form action="/move/{{task.modelClass}}/{{task.id}}">
+                                        <input class="buttonTrue" type="submit" value="Move to in progress">
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <br>
+                    <hr>                
                     {% endfor %}
-            </div>
+                </div>
+
         
-        
+            <div style="margin-left: 10%;">
             <form action="/" method="POST">
                 <input type="text" name="content" id="content">
                 <input type="submit" value="add task">
             </form>
-        
-            
             <br>
+            </div>
+
+            
+
         </div>
         <div class="column">
             <h1 style="text-align: center">In progress</h1>
     
             <div class="back">        
-            <div style="text-align: center;">
-                <div class="row">
-                    <div class="column">
-                        Task
-                    </div>
-                    <div class="column">
-                        Added
-                    </div>
-                    <div class="column">
-                        Actions
-                    </div>
-                </div>
-            </div>
-        
-        
-                <table>
         
                     {% for process in process %}        
-                        <tr>
-                            <td><a style="color: #000000;text-decoration:none" href="/comment/{{process.modelClass}}/{{process.id}}">{{process.content}}</a></td>
-                            <td>{{process.date_created.date()}}</td>
-                            <td>
-                                <form action="/delete/{{process.modelClass}}/{{process.id}}">
-                                    <input type="submit" value="Delete!">
-                                </form>
-                                <form action="/move/{{process.modelClass}}/{{process.id}}">
-                                    <input type="submit" value="Done!">
-                                </form>
-                                
-                            </td>
-                        </tr>
+                            <div style="text-align: center;">
+                                <a style="color: #000000;text-decoration:none;font-family: Arial, Helvetica, sans-serif;font-size: large;" href="/comment/{{process.modelClass}}/{{process.id}}">{{process.content}}</a>
+                            </div>
+                            <h5 style="text-align: center;">{{process.date_created.date()}}</h5>
+
+                            <div class="row">
+                                <div style="text-align: center;">
+                                    <div class="left">
+                                        <form action="/delete/{{process.modelClass}}/{{process.id}}">
+                                            <input class="buttonFalse" type="submit" value="Delete!">
+                                        </form>
+                                    </div>
+                                    
+                                    <div class="right">
+                                        <form action="/move/{{process.modelClass}}/{{process.id}}">
+                                            <input class="buttonTrue" type="submit" value="Done!">
+                                        </form>
+                                    </div>
+                                </div>
+                                <br>
+                                <hr>
                     {% endfor %}
             
             
-                </table>
             </div>
         </div>
         <div class="column">
     
             <h1 style="text-align: center">Done</h1>
             <div class="back">
-                <div style="text-align: center;">
-                    <div class="row">
-                        <div class="column">
-                            Task
-                        </div>
-                        <div class="column">
-                            Added
-                        </div>
-                        <div class="column">
-                            Actions
-                        </div>
-                    </div>
-                </div>
-        
-                <table>
-                    {% for done in done %}        
-                        <tr>
-                            <td><a style="color: #000000;text-decoration:none" href="/comment/{{done.modelClass}}/{{done.id}}">{{done.content}}</a></td>
-                            <td>{{done.date_created.date()}}</td>
-                            <td>
-                                <form action="/delete/{{done.modelClass}}/{{done.id}}">
-                                    <input type="submit" value="Delete!">
-                                </form>
-                            </td>
-                        </tr>
+                    {% for done in done %}      
+                        <div style="text-align: center;">
+                            <a style="color: #000000;text-decoration:none;font-family: Arial, Helvetica, sans-serif;font-size: large;" href="/comment/{{done.modelClass}}/{{done.id}}">{{done.content}}</a>
+                        </div>  
+                        <h5 style="text-align: center;">{{done.date_created.date()}}</h5>
+                            <div style="text-align: center;">
+                                    <form action="/delete/{{done.modelClass}}/{{done.id}}">
+                                        <input class="buttonFalse" type="submit" value="Delete!">
+                                    </form>
+                                
+                            <br>
+                            <hr>
                     {% endfor %}
             
             
-                </table>
             </div>
         </div>
     </div> 
